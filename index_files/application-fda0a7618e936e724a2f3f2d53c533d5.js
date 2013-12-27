@@ -6409,13 +6409,13 @@ function() {
 } (),
 SATOSHI = 1e8,
 $(document).ready(function() {
-  $("abbr[title], abbr[data-original-title]").tooltip(),
-  $(".pop").popover(),
+  $("abbr[title], abbr[data-original-title]").tooltip();
+  $(".pop").popover();
   $(".pop-html").popover({
     html: !0
-  }),
-  $(".tip").tooltip(),
-  $("#notificationModal").modal(),
-  calcTotal(),
-  ticker()
+  });
+  $(".tip").tooltip();
+  $("#notificationModal").modal();
+  calcTotal();
+  ticker();
 });
