@@ -6418,4 +6418,13 @@ $(document).ready(function() {
   $("#notificationModal").modal();
   calcTotal();
   ticker();
+
+  // Ticker updates
+  var socket = io.connect('http://localhost:8080');
+  socket.on('ticker', function (data) {
+    $.each(['usdkrw', 'usdlast', 'usdhigh', 'usdlow', 'usdvwap'], function(i, field) {
+      $('.' + field).data(field, data[field]);
+    });
+    ticker();
+  });
 });
