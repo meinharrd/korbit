@@ -1,0 +1,112 @@
+<!--
+	seal_installSeal();
+	
+	function seal_getFlashVersion() {
+		var version = 0;
+		if (navigator.plugins && navigator.mimeTypes.length) {
+			var plugin = navigator.plugins["Shockwave Flash"];
+			if (plugin && plugin.description) {
+				version = parseInt(plugin.description.replace(/([a-zA-Z]|\s)+/, "").replace(/(\s+r|\s+b[0-9]+)/, ".").split(".")[0]);
+			}
+		}
+		else {
+			try {
+				var flashObj = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");
+			}
+			catch (e) {
+				try {
+					var flashObj = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");
+					version = 6;
+					flashObj.AllowScriptAccess = "always";
+				}
+				catch (e) {
+					if (version == 6) {
+						return version;
+					}
+				}
+				try {
+					flashObj = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+				}
+				catch (e) {}
+			}
+			if (flashObj != null) {
+				version = parseInt(flashObj.GetVariable("$version").split(" ")[1].split(",")[0]);
+			}
+		}
+		return version;
+	}
+	
+	function seal_useFlash() {
+		var minVersion = 8;
+		var resellerId = "1";
+		var sealVersion = "3";
+		var useFlashPref = "false";
+		
+		return useFlashPref == "true" && (resellerId == "1" || sealVersion == "0") && self == top && minVersion <= seal_getFlashVersion();
+	}
+	
+	function seal_installSeal() {
+		var commonName = "www.korbit.co.kr";
+		var org = "null";
+		var resellerId = "1";
+		var sealVersion = "3";
+		var isEV = "false";
+		var requiresFilter = "false";
+		var sealName = "siteseal_gd_3_h_l_m";
+		var flashUrl = "https://seal.godaddy.com/flash/3/siteseal_gd_3_h_l_m.swf";
+		var imageUrl = "https://seal.godaddy.com/images/3/siteseal_gd_3_h_l_m.gif";
+		var sealWidth = "132";
+		var sealHeight = "31";
+		var sealType = "dv";
+		
+		if (seal_useFlash()) {
+			document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" width="' + sealWidth + '" height="' + sealHeight + '" id="' + sealName + '" align="middle">');
+			document.write('<param name="movie" value="' + flashUrl);
+			
+			if (sealVersion == "0" && sealType == "dv")
+				document.write('?domainName=' + commonName + '&color=000000');
+			else if (sealVersion == "0" && (sealType == "iv" || sealType == "ev"))
+				document.write('?companyName=' + commonName + ' - ' + org);
+				
+			document.write('" />');
+			document.write('<param name="quality" value="high" />');
+			document.write('<param name="AllowScriptAccess" value="always" />');
+			
+			if (sealVersion == "0" && (sealType == "iv" || sealType == "ev"))
+				document.write('<param name="bgcolor" value="#333333" />');
+			else
+				document.write('<param name="wmode" value="transparent" />');
+				
+			document.write('<embed src="' + flashUrl);
+			
+			if (sealVersion == "0" && (sealType == "iv" || sealType == "ev"))
+				document.write('?companyName=' + commonName + ' - ' + org + '" bgcolor="#333333"');
+			else {
+				if (sealVersion == "0" && sealType == "dv")
+					document.write('?domainName=' + commonName + '&color=000000');
+				document.write('" wmode="transparent"');
+			}
+			
+			document.write(' quality="high" width="' + sealWidth + '" height="' + sealHeight + '" name="' + sealName + '" align="middle" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer" AllowScriptAccess="always" />');
+			document.write('</object>');
+		}
+		else if (requiresFilter == "true" && document.body && document.body.filters)
+			document.write('<span style="display:inline-block;cursor:pointer;cursor:hand;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + imageUrl + '\', sizingMethod=\'crop\');width:' + sealWidth + 'px;height:' + sealHeight + 'px;" onclick="verifySeal();"></span>');
+		else
+			document.write('<img style="cursor:pointer;cursor:hand" width="' + sealWidth + '" height="' + sealHeight + '" src="' + imageUrl + '" onclick="verifySeal();"/>');
+	
+		if (isEV == "true") {
+			if (resellerId == "1")
+				document.write('<img src="https://evbeacon.godaddy.com/images/spacer.gif"/>');
+			else
+				document.write('<img src="https://evbeacon.starfieldtech.com/images/spacer.gif"/>');
+		}
+	}
+	
+	function verifySeal() {
+		var bgHeight = "460";
+		var bgWidth = "593";
+		var url = "https://seal.godaddy.com/verifySeal?sealID=E9eZNXTsSETptwJY73R6F8P7EbUZ0jNsCfKxia3EwZAd2xBqkgZJque1V5";
+		window.open(url,'SealVerfication','menubar=no,toolbar=no,personalbar=no,location=yes,status=no,resizable=yes,fullscreen=no,scrollbars=no,width=' + bgWidth + ',height=' + bgHeight);
+	}
+// -->
