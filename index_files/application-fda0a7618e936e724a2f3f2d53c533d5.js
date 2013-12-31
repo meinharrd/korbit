@@ -6426,7 +6426,7 @@ $(document).ready(function() {
     });
   }
 
-  // Ticker updates
+  // Handle ticker updates
   var socket = io.connect('http://localhost:8080');
   socket.on('korbit price update', function (data) {
     $('.korbitLast').html(krwFormat(data.krwlast));
