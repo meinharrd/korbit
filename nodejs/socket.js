@@ -1,11 +1,22 @@
+var fs = require('fs');
 var io = require('socket.io').listen(8080);
+var watch = require('node-watch');
 
-io.sockets.on('connection', function (socket) {
-  socket.emit('ticker', {
-    usdkrw: 1058.398346,
-    usdlast: 797.00000,
-    usdhigh: 829.80000,
-    usdlow: 733.00000,
-    usdvwap: 791.82502
+var mtgoxPricesFile = 'mtgoxPrices.json';
+
+function broadcastFile(socket, filename) {
+  fs.readFile(filename, 'utf8', function(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      socket.emit('price update', JSON.parse(data));
+    }
+  });
+}
+
+io.sockets.on('connection', function(socket) {
+  broadcastFile(socket, mtgoxPricesFile);
+  watch(mtgoxPricesFile, function(filename) {
+    broadcastFile(socket, filename);
   });
 });
