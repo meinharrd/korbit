@@ -38,7 +38,7 @@ socket.on('message', function(data) {
         "usdlow": ticker.low.value,
         "usdvwap": ticker.vwap.value
       };
-      fs.writeFile(mtgoxPricesFile, json, function(error) {
+      fs.writeFile(mtgoxPricesFile, JSON.stringify(json), function(error) {
         if (error) {
           console.log('Error writing JSON file: ' + error);  
         } else {
