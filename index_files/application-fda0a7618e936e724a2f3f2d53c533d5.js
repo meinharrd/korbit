@@ -6419,15 +6419,26 @@ $(document).ready(function() {
   calcTotal();
   ticker();
 
+  // Poor man's background flasher
+  function flashBackground(cssId) {
+    $(cssId).css('background-color', '#aaa').delay(500).queue(function() {
+      $(this).css('background-color', '').dequeue();
+    });
+  }
+
   // Ticker updates
   var socket = io.connect('http://localhost:8080');
   socket.on('korbit price update', function (data) {
     $('.korbitLast').html(krwFormat(data.krwlast));
+    flashBackground('.korbitLast');
   });
   socket.on('mtgox price update', function (data) {
     $.each(['usdkrw', 'usdlast', 'usdhigh', 'usdlow', 'usdvwap'], function(i, field) {
       $('.' + field).data(field, data[field]);
     });
     ticker();
+    $.each(['krwLast', 'usdLast', 'krwHigh', 'krwLow', 'krwVwap'], function(i, field) {
+      flashBackground('.' + field);
+    });
   });
 });
