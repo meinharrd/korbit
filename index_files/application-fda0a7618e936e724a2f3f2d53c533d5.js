@@ -6421,6 +6421,9 @@ $(document).ready(function() {
 
   // Ticker updates
   var socket = io.connect('http://localhost:8080');
+  socket.on('korbit price update', function (data) {
+    $('.korbitLast').html(krwFormat(data.krwlast));
+  });
   socket.on('mtgox price update', function (data) {
     $.each(['usdkrw', 'usdlast', 'usdhigh', 'usdlow', 'usdvwap'], function(i, field) {
       $('.' + field).data(field, data[field]);
