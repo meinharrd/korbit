@@ -6421,7 +6421,7 @@ $(document).ready(function() {
 
   // Ticker updates
   var socket = io.connect('http://localhost:8080');
-  socket.on('price update', function (data) {
+  socket.on('mtgox price update', function (data) {
     $.each(['usdkrw', 'usdlast', 'usdhigh', 'usdlow', 'usdvwap'], function(i, field) {
       $('.' + field).data(field, data[field]);
     });

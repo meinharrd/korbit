@@ -2,21 +2,30 @@ var fs = require('fs');
 var io = require('socket.io').listen(8080);
 var watch = require('node-watch');
 
-var mtgoxPricesFile = 'mtgoxPrices.json';
+var files = [
+  {
+    event: 'korbit price update',
+    name: 'korbitPrices.json'
+  },
+  {
+    event: 'mtgox price update',
+    name: 'mtgoxPrices.json'
+  }
+];
 
-function broadcastFile(socket, filename) {
+function broadcastFile(socket, eventName, filename) {
   fs.readFile(filename, 'utf8', function(error, data) {
-    if (error) {
-      console.log(error);
-    } else {
-      socket.emit('price update', JSON.parse(data));
+    if (error == null) {
+      socket.emit(eventName, JSON.parse(data));
     }
   });
 }
 
 io.sockets.on('connection', function(socket) {
-  broadcastFile(socket, mtgoxPricesFile);
-  watch(mtgoxPricesFile, function(filename) {
-    broadcastFile(socket, filename);
+  files.forEach(function(file) {
+    broadcastFile(socket, file.event, file.name);
+    watch(file.name, function() {
+      broadcastFile(socket, file.event, file.name);
+    });
   });
 });
