@@ -23,7 +23,7 @@ function scrapeKorbit() {
     }
     
     // Scrape again after 1 minute
-    setTimeout(scrapeKorbit, 5000);
+    setTimeout(scrapeKorbit, 60000);
   });
 }
 
