@@ -6437,7 +6437,7 @@ $(document).ready(function() {
   });
   socket.on('mtgox price update', function (data) {
     $.each(['usdkrw', 'usdlast', 'usdhigh', 'usdlow', 'usdvwap'], function(i, field) {
-      $('.' + field).data(field, data[field]);
+      $('.usdkrw').data(field, data[field]);
     });
     ticker();
     $.each(['krwLast', 'usdLast', 'krwHigh', 'krwLow', 'krwVwap'], function(i, field) {
