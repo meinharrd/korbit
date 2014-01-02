@@ -646,6 +646,7 @@ function(e, t) {
       return i ? [t.createElement(i[1])] : (i = ut.buildFragment([e], t, o), o && ut(o).remove(), ut.merge([], i.childNodes))
     },
     parseJSON: function(t) {
+// Commented out, because it's not working due to faulty de-uglifying, please ignore
 //      return e.JSON && e.JSON.parse ? e.JSON.parse(t) : null === t ? t : "string" == typeof t && (t = ut.trim(t), t & >.test(t.replace(vt, "@").replace(bt, "]").replace(yt, ""))) ? new Function("return " + t)() : (ut.error("Invalid JSON: " + t), void 0)
     },
     parseXML: function(n) {
