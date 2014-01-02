@@ -6427,7 +6427,10 @@ $(document).ready(function() {
   }
 
   // Handle ticker updates
-  var socket = io.connect('http://localhost:8080');
+  if (SOCKET_BASE == undefined) {
+    SOCKET_BASE = 'http://satoshi.benn.org:8080';
+  }
+  var socket = io.connect(SOCKET_BASE);
   socket.on('korbit price update', function (data) {
     $('.korbitLast').html(krwFormat(data.krwlast));
     flashBackground('.korbitLast');

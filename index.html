@@ -7,7 +7,10 @@
     <script src="./index_files/angular.min.js"></script><style type="text/css"></style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\:form{display:block;}</style>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script> -->
   <link href="https://www.korbit.co.kr/assets/application-0b7589f3d8e3b7637a1b44c526094092.css" media="all" rel="stylesheet">
-  <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+  <script src="nodejs/config.js"></script>
+  <script>
+    document.writeln("<script src='" + SOCKET_BASE + "/socket.io/socket.io.js'></" + "script>");
+  </script>
   <script src="./index_files/application-fda0a7618e936e724a2f3f2d53c533d5.js"></script>
   <meta content="authenticity_token" name="csrf-param">
 <meta content="rxRXfpYN1pr7xXjwVzGkIGgCJoC/zA81A1IgPS7N7gg=" name="csrf-token">
