@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "cheerio": "*",
+    "node-watch": "*",
+    "socket.io": "*",
+    "socket.io-client": "*"
+  }
+}
